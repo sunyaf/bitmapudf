@@ -72,7 +72,9 @@ public class RoaringBitMapByteUDAF extends AbstractGenericUDAFResolver {
         @Override
         public void iterate(AggregationBuffer agg, Object[] parameters) throws HiveException {
             BitMapBuffer myagg = (BitMapBuffer) agg;
-            myagg.addItem(PrimitiveObjectInspectorUtils.getInt(parameters[0], intInputOI));
+            if(parameters[0] != null){
+                myagg.addItem(PrimitiveObjectInspectorUtils.getInt(parameters[0], intInputOI));
+            }
         }
 
         @Override
