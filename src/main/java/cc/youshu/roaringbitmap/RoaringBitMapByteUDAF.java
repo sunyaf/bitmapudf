@@ -1,7 +1,5 @@
 package cc.youshu.roaringbitmap;
 
-import cc.youshu.bitmap.BitMapBuffer;
-import cc.youshu.bitmap.RoaringBitmapDistinctUDAF;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.hadoop.hive.ql.exec.Description;
@@ -27,7 +25,7 @@ import java.io.IOException;
 @Description(name = "bit_map_byte",
         value = "_FUNC_(x) - Returns  the distinct element  roaringbitmap byte")
 public class RoaringBitMapByteUDAF extends AbstractGenericUDAFResolver {
-    private static final Log LOG = LogFactory.getLog(RoaringBitmapDistinctUDAF.class.getName());
+    private static final Log LOG = LogFactory.getLog(RoaringBitMapByteUDAF.class.getName());
 
     @Override
     public GenericUDAFEvaluator getEvaluator(TypeInfo[] params) throws SemanticException {
