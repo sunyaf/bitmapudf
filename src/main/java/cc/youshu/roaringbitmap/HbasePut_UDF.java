@@ -67,26 +67,13 @@ public class HbasePut_UDF extends UDF {
             if (bytes != null && bytes.length > 0) {
                 Table table = HTableFactory.getHTable(configMap);
                 Put thePut = new Put(key.getBytes());
-/*            Get theGet = new Get(key.getBytes());
-            Result res = table.get(theGet);
-
-            byte[] valBytes = res.getValue(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes());
-            if(valBytes != null && valBytes.length>0){
-                ImmutableRoaringBitmap other = new ImmutableRoaringBitmap(ByteBuffer.wrap(valBytes));
-                ImmutableRoaringBitmap thisOne = new ImmutableRoaringBitmap(ByteBuffer.wrap(bytes));
-                MutableRoaringBitmap integers = thisOne.toMutableRoaringBitmap();
-                integers.or(other);
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                DataOutputStream dos = new DataOutputStream(bos);
-                integers.serialize(dos);
-                dos.close();
-                bytes =  bos.toByteArray();
-            }*/
                 thePut.addColumn(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes(), bytes);
                 table.put(thePut);
                 table.close();
+                return 1;
+            }else {
+                return 0;
             }
-            return 1;
         } catch (Exception exc) {
             LOG.error("Error while doing HBase Puts");
             throw new RuntimeException(exc);
