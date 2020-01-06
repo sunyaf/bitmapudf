@@ -1,4 +1,6 @@
-
+*.jar
+dependency-reduced-pom.xml
+hiveudf.iml
 .idea/
 lib/
 out/
