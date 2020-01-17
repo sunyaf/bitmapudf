@@ -68,7 +68,7 @@ val)
 FROM(
 SELECT plan_code,bit_map_byte(id) FROM dw.rw_plan GROUP BY plan_code) a;
 ```
-### hbase_put_add函数（udtf）
+### bitmap_to_id函数（udtf）
 
  1. 作用：读取bitmap的二进制，返回里面所有的id，分成不同的行
  2. 创建
