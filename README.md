@@ -7,7 +7,7 @@ hive udf 读写存储到hbase的roaringbitmap
 打包方法
 `mvn clean package`
 然后将target下jar包上传到hdfs指定目录，以方便创建udf函数，或者您也可以直接上传到服务器，通过add jar命令创建udf函数。
-本人上传到了`/utils/hiveUdf/`
+本人上传到了`/utils/hiveUdf/`,pom文件里面的额额依赖包，放到hive的第三方依赖包目录里面
 ### bit_map_byte函数
  1. 作用：将数字去重的集合存储到roaringbitmap里面，输出二进制
  2. 创建UDF
