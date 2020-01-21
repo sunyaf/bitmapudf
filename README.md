@@ -1,5 +1,5 @@
 # bitmapudf
-hive udf 读写存储到hbase的roaringbitmap
+hive udf 读写存储到hbase的roaringbitmap 咆哮位图
 
 在cc.youshu.redis包里面是一个redis相关的函数，比较简单，这里我就不在多说了，下面重点说一下roaringbitmap相关的udf
 
