@@ -52,27 +52,29 @@ public class HbasePut_UDF extends UDF {
 
 
     public Integer evaluate(Map<String, String> configMap, String key, BytesWritable value) {
-        if (value == null) {
-            LOG.info(" value length is 0");
-            return 0;
-        }
         if (StringUtil.isBlank(key)) {
             LOG.info("key  length is 0");
             return 0;
         }
-        byte[] bytes = value.getBytes();
+        byte[] bytes = new byte[0];
+        if(value!=null){
+            bytes = value.getBytes();
+        }
         HTableFactory.checkConfig(configMap);
 
         try {
-            if (bytes != null && bytes.length > 0) {
-                Table table = HTableFactory.getHTable(configMap);
+            Table table = HTableFactory.getHTable(configMap);
+            if ( bytes.length > 0) {
                 Put thePut = new Put(key.getBytes());
                 thePut.addColumn(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes(), bytes);
                 table.put(thePut);
                 table.close();
                 return 1;
             }else {
-                return 0;
+                Delete delete = new Delete(key.getBytes());
+                delete.addColumn(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes());
+                table.delete(delete);
+                return 1;
             }
         } catch (Exception exc) {
             LOG.error("Error while doing HBase Puts");
