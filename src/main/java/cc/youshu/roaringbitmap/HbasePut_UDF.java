@@ -72,8 +72,9 @@ public class HbasePut_UDF extends UDF {
                 return 1;
             }else {
                 Delete delete = new Delete(key.getBytes());
-                delete.addColumn(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes());
+                delete.addColumns(configMap.get(HTableFactory.FAMILY_TAG).getBytes(), configMap.get(HTableFactory.QUALIFIER_TAG).getBytes());
                 table.delete(delete);
+                table.close();
                 return 1;
             }
         } catch (Exception exc) {
