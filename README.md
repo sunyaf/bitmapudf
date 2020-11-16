@@ -1,5 +1,5 @@
 # bitmapudf
-hive udf 读写存储到hbase的roaringbitmap
+hive udf 读写存储到hbase的roaringbitmap 咆哮位图
 
 在cc.youshu.redis包里面是一个redis相关的函数，比较简单，这里我就不在多说了，下面重点说一下roaringbitmap相关的udf
 
@@ -7,7 +7,7 @@ hive udf 读写存储到hbase的roaringbitmap
 打包方法
 `mvn clean package`
 然后将target下jar包上传到hdfs指定目录，以方便创建udf函数，或者您也可以直接上传到服务器，通过add jar命令创建udf函数。
-本人上传到了`/utils/hiveUdf/`
+本人上传到了`/utils/hiveUdf/`,pom文件里面的额额依赖包，放到hive的第三方依赖包目录里面
 ### bit_map_byte函数
  1. 作用：将数字去重的集合存储到roaringbitmap里面，输出二进制
  2. 创建UDF
@@ -68,7 +68,7 @@ val)
 FROM(
 SELECT plan_code,bit_map_byte(id) FROM dw.rw_plan GROUP BY plan_code) a;
 ```
-### hbase_put_add函数（udtf）
+### bitmap_to_id函数（udtf）
 
  1. 作用：读取bitmap的二进制，返回里面所有的id，分成不同的行
  2. 创建
